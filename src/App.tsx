@@ -83,6 +83,58 @@ function App() {
     setIsFlipped(false);
   }, [searchTerm, activeDeckId]);
 
+useEffect(() => {
+  function handleKeyDown(event: KeyboardEvent) {
+    const target = event.target as HTMLElement;
+
+    if (
+      target.tagName === "INPUT" ||
+      target.tagName === "TEXTAREA" ||
+      target.isContentEditable
+    ) {
+      return;
+    }
+
+    if (event.code === "Space") {
+      event.preventDefault();
+
+      if (visibleCards.length > 0) {
+        setIsFlipped((currentValue) => !currentValue);
+      }
+    }
+
+    if (event.key === "ArrowRight") {
+      if (visibleCards.length > 0) {
+        setCurrentCardIndex((currentIndex) =>
+          currentIndex + 1 >= visibleCards.length
+            ? 0
+            : currentIndex + 1
+        );
+
+        setIsFlipped(false);
+      }
+    }
+
+    if (event.key === "ArrowLeft") {
+      if (visibleCards.length > 0) {
+        setCurrentCardIndex((currentIndex) =>
+          currentIndex - 1 < 0
+            ? visibleCards.length - 1
+            : currentIndex - 1
+        );
+
+        setIsFlipped(false);
+      }
+    }
+  }
+
+  window.addEventListener("keydown", handleKeyDown);
+
+  return () => {
+    window.removeEventListener("keydown", handleKeyDown);
+  };
+}, [visibleCards.length]);
+  
   function createDeck() {
     const deckName = prompt("Enter a name for your new deck:");
 
