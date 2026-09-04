@@ -22,12 +22,13 @@ A browser-based flashcards study app built with React, TypeScript, and Vite.
 - Restore saved data after refreshing the page
 - Responsive layout
 - Keyboard focus styles for accessibility
+- Keyboard shortcuts using Space to flip and the Left/Right arrow keys to navigate cards
 
 ## Reflection
 
 - AI saved me time by helping me set up the React and TypeScript structure and organize the functions needed for decks, cards, search, navigation, and LocalStorage.
 
-- One issue I identified was that the New Deck button appeared not to work while I was testing the app inside the VS Code browser preview. I tested the same Vite app in Microsoft Edge and confirmed that the button and browser prompts worked correctly.
+- One AI-generated version of the app had a bug where the Flip button did not work because the event handling was missing. I identified the missing connection while testing and fixed it by connecting the Flip control to the flipCard() function.
 
 - I refactored the project from a plain HTML, CSS, and JavaScript version into React and TypeScript. I used React state such as `decks`, `activeDeckId`, `currentCardIndex`, `searchTerm`, and `isFlipped` instead of manually updating the DOM.
 
